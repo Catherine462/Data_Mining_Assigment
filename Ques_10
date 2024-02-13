@@ -1,10 +1,11 @@
 
 # -------------------------------------------------------------------------
-# AUTHOR: your name
-# FILENAME: title of the source file
-# SPECIFICATION: description of the program
+# AUTHOR: Catharine Parmar
+# FILENAME: Cosine Similarity
+# SPECIFICATION: This program finds cosine similarity and find the highest similarities between the given documents.
 # FOR: CS 5990 (Advanced Data Mining) - Assignment #1
-# TIME SPENT: how long it took you to complete the assignment
+# FOR: CS 5990 (Advanced Data Mining) - Assignment #1
+# TIME SPENT: It took me 1 hr 
 # -----------------------------------------------------------*/
 # Importing some Python libraries
 import numpy as np
@@ -16,13 +17,24 @@ doc3 = "support soccer at the olympic games"
 doc4 = "I do like soccer, my favorite sport in the olympic games"
 # Use the following words as terms to create your document-term matrix
 # [soccer, favorite, sport, like, one, support, olympic, games]
-# --> Add your Python code here
+
+document_term_matrix = np.array([
+    [1, 1, 1, 0, 0, 0, 0, 0],  
+    [1, 1, 1, 1, 1, 0, 0, 0],  
+    [1, 0, 0, 0, 0, 1, 1, 1],  
+    [1, 1, 1, 1, 0, 0, 1, 1], 
+])
+pairwise_similarities = cosine_similarity(document_term_matrix)
 # Compare the pairwise cosine similarities and store the highest one
 # Use cosine_similarity([X], [Y]) to calculate the similarities between 2 vectors
 only
-# Use cosine_similarity([X, Y, Z]) to calculate the pairwise similarities between
-multiple vectors
-# --> Add your Python code here
-# Print the highest cosine similarity following the information below
-# The most similar documents are: doc1 and doc2 with cosine similarity = x
-# --> Add your Python code here
+for i in range(len(document_term_matrix)):
+    for j in range(i + 1, len(document_term_matrix)):
+        similarity = pairwise_similarities[i][j]
+        print("Cosine similarity between doc{} and doc{}: {:.2f}".format(i+1, j+1, similarity))
+        if pairwise_similarities[i][j] > max_similarity:
+            max_similarity = pairwise_similarities[i][j]
+            doc1_index = i
+            doc2_index = j
+print("The highest cosine similarity is between doc{} and doc{} with the similarity value: {:.2f}".format(
+    doc1_index + 1, doc2_index + 1, max_similarity))
